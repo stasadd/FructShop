@@ -19,22 +19,15 @@ public class FruitShop {
 
     public List<Fruit> fruits = new ArrayList<Fruit>();
     private String mainFile = "Files\\SHOP.txt";
-    private Double moneyBalance;
     Gson gson = new Gson();
 
     public FruitShop() {
-        fruits.add(new Fruit(FruitType.Apple, 15, new Date(), 100));
-        //save(mainFile);
-        //load(mainFile);
-        addFruits("Files\\Delivery.txt");
-        System.out.println(fruits.size());
-        System.out.println(fruits.get(0).getType());
+        load(mainFile);
     }
 
     public void addFruits(String pathToJsonFile) {
         try {
             String json = FileLoader.loadString(pathToJsonFile);
-            System.out.println(json);
             Delivery delivery = gson.fromJson(json, Delivery.class);
             if(delivery != null && delivery.fruits != null) {
                 for (Fruit f : delivery.fruits) {

@@ -1,0 +1,6 @@
+{
+"fruits":
+[
+{"type":"Grapes","shelfLife":10,"date":"19/04/2019","price":80}
+]
+}
