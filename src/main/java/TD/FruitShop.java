@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -83,6 +84,22 @@ public class FruitShop {
         }
     }
 
+    public List<Fruit> getSpoiledFruits(Date date) {
+        return null;
+    }
+
+    public List<Fruit> getAvailableFruits(Date date) {
+        return null;
+    }
+
+    public List<Fruit> getSpoiledFruits(Date date, FruitType type) {
+        return null;
+    }
+
+    public List<Fruit> getAvailableFruits(Date date, FruitType type) {
+        return null;
+    }
+
     private void Menu() {
         System.out.println("1 - вивести весь список на екран");
         System.out.println("2 - добавити поставку (1 або 2)");
@@ -126,15 +143,19 @@ public class FruitShop {
                         break;
                     }
                     case 5: {
+                        showList(getSpoiledFruits(getCustomDate()));
                         break;
                     }
                     case 6: {
+                        showList(getSpoiledFruits(getCustomDate(), getType()));
                         break;
                     }
                     case 7: {
+                        showList(getAvailableFruits(getCustomDate()));
                         break;
                     }
                     case 8: {
+                        showList(getAvailableFruits(getCustomDate(), getType()));
                         break;
                     }
                 }
@@ -142,4 +163,19 @@ public class FruitShop {
         }
     }
 
+    private FruitType getType() throws Exception {
+        Scanner inType = new Scanner(System.in);
+        FruitType.showTypes();
+        System.out.print("вибрати тип ->");
+        int i = inType.nextInt();
+        return FruitType.getByIndex(i);
+    }
+
+    private Date getCustomDate() throws Exception {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Scanner inDate = new Scanner(System.in);
+        System.out.print("Введіть дату у форматі dd/MM/yyyy ->");
+        String str = inDate.nextLine();
+        return format.parse(str);
+    }
 }
