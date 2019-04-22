@@ -8,10 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class FruitShop {
 
@@ -93,12 +90,32 @@ public class FruitShop {
         }
     }
 
-    public List<Fruit> getSpoiledFruits(Date date) {
-        return null;
+    public List<Fruit> getSpoiledFruits(Date date) throws Exception {
+        List<Fruit> Spoiled = new ArrayList<Fruit>();
+        Calendar c = Calendar.getInstance();
+        for (Fruit f : this.fruits) {
+            Date date1  = f.getDate();
+            c.setTime(date1);
+            c.add(Calendar.DATE,f.getShelfLife());
+            date1 = c.getTime();
+            if ((date.compareTo(date1)) != -1)
+                Spoiled.add(f);
+        }
+        return Spoiled;
     }
 
-    public List<Fruit> getAvailableFruits(Date date) {
-        return null;
+    public List<Fruit> getAvailableFruits(Date date) throws Exception {
+        List<Fruit> Available = new ArrayList<Fruit>();
+        Calendar c = Calendar.getInstance();
+        for (Fruit f : this.fruits) {
+            Date date1  = f.getDate();
+            c.setTime(date1);
+            c.add(Calendar.DATE,f.getShelfLife());
+            date1 = c.getTime();
+            if ((date.compareTo(date1)) <= 0)
+                Available.add(f);
+        }
+        return Available;
     }
 
     public List<Fruit> getSpoiledFruits(Date date, FruitType type) {
