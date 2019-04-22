@@ -32,6 +32,10 @@ public class Fruit {
         return format.parse(this.date);
     }
 
+    public String getStrDate() {
+        return this.date;
+    }
+
     public void setDate(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         this.date = format.format(date);
