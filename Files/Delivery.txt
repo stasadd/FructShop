@@ -1,0 +1,7 @@
+{
+"fruits":
+[
+{"type":"Orange","shelfLife":15,"date":"22/04/2019","price":100},
+{"type":"Orange","shelfLife":15,"date":"22/04/2019","price":100}
+]
+}
