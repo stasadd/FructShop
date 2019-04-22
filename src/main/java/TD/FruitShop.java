@@ -4,6 +4,7 @@ import GV.Fruit;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FruitShop {
@@ -13,8 +14,9 @@ public class FruitShop {
     Gson gson = new Gson();
 
     public FruitShop() {
-        addFruits("Files\\Delivery");
-        
+        fruits.add(new Fruit(FruitType.Apple, 15, new Date("10/07/2017"), 100));
+        save("test.txt");
+        //addFruits("Files\\Delivery");
     }
 
     public void addFruits(String pathToJsonFile) {
@@ -35,6 +37,13 @@ public class FruitShop {
         catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public void save(String pathToJsonFile) {
+        String json = gson.toJson(this.fruits);
+        System.out.println(json);
+
+
     }
 
 
