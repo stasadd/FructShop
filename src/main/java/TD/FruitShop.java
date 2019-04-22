@@ -22,6 +22,15 @@ public class FruitShop {
     public List<Fruit> fruits = new ArrayList<Fruit>();
     private String mainFile = "Files\\SHOP.txt";
     private Gson gson = new Gson();
+    private Double moneyBalance;
+
+    public Double getMoneyBalance() {
+        return moneyBalance;
+    }
+
+    public void setMoneyBalance(Double moneyBalance) {
+        this.moneyBalance = moneyBalance;
+    }
 
     public FruitShop() {
         load(mainFile);
