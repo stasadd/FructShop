@@ -2,21 +2,13 @@ package GV;
 
 import TD.FruitType;
 
+import java.util.Date;
+
 public class Fruit {
     FruitType type;
-    int daysExpiration;
-    String dateDelivery;
+    int shelfLife;
+    Date date;
     double price;
-
-    public Fruit() {
-    }
-
-    public Fruit(FruitType type, int daysExpiration, String dateDelivery, double price) {
-        this.type = type;
-        this.daysExpiration = daysExpiration;
-        this.dateDelivery = dateDelivery;
-        this.price = price;
-    }
 
     public FruitType getType() {
         return type;
@@ -26,20 +18,20 @@ public class Fruit {
         this.type = type;
     }
 
-    public int getDaysExpiration() {
-        return daysExpiration;
+    public int getShelfLife() {
+        return shelfLife;
     }
 
-    public void setDaysExpiration(int daysExpiration) {
-        this.daysExpiration = daysExpiration;
+    public void setShelfLife(int shelfLife) {
+        this.shelfLife = shelfLife;
     }
 
-    public String getDateDelivery() {
-        return dateDelivery;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDateDelivery(String dateDelivery) {
-        this.dateDelivery = dateDelivery;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public double getPrice() {
@@ -47,6 +39,16 @@ public class Fruit {
     }
 
     public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Fruit() {
+    }
+
+    public Fruit(FruitType type, int shelfLife, Date date, double price) {
+        this.type = type;
+        this.shelfLife = shelfLife;
+        this.date = date;
         this.price = price;
     }
 }
