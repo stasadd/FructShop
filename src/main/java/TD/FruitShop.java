@@ -94,7 +94,7 @@ public class FruitShop {
         System.out.println("8 - відібрати товари, готові для продажу (по даті і типу)");
 
         System.out.println("0 - вихід");
-        System.out.print("Ваш вибір (1 або 2) ->");
+        System.out.print("Ваш вибір ->");
     }
 
     public void showShop() {
@@ -112,7 +112,7 @@ public class FruitShop {
                         break;
                     }
                     case 2: {
-                        System.out.print("->");
+                        System.out.print("(1 або 2) ->");
                         int fileIndex = in.nextInt();
                         addFruits("Files\\delivery_" + fileIndex + ".txt");
                         break;
