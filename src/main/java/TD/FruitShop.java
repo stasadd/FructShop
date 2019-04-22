@@ -118,12 +118,36 @@ public class FruitShop {
         return Available;
     }
 
-    public List<Fruit> getSpoiledFruits(Date date, FruitType type) {
-        return null;
+    public List<Fruit> getSpoiledFruits(Date date, FruitType type) throws Exception{
+        List<Fruit> Spoiled = new ArrayList<Fruit>();
+        Calendar c = Calendar.getInstance();
+        for (Fruit f : this.fruits) {
+            if (f.getType().equals(type)) {
+                Date date1  = f.getDate();
+                c.setTime(date1);
+                c.add(Calendar.DATE,f.getShelfLife());
+                date1 = c.getTime();
+                if ((date.compareTo(date1) == -1))
+                    Spoiled.add(f);
+            }
+        }
+        return Spoiled;
     }
 
-    public List<Fruit> getAvailableFruits(Date date, FruitType type) {
-        return null;
+    public List<Fruit> getAvailableFruits(Date date, FruitType type) throws Exception {
+        List<Fruit> Available = new ArrayList<Fruit>();
+        Calendar c = Calendar.getInstance();
+        for (Fruit f : this.fruits) {
+            if(f.getType().equals(type)) {
+                Date date1  = f.getDate();
+                c.setTime(date1);
+                c.add(Calendar.DATE,f.getShelfLife());
+                date1 = c.getTime();
+                if ((date.compareTo(date1)) != -1)
+                    Available.add(f);
+            }
+        }
+        return Available;
     }
 
     private void Menu() {
