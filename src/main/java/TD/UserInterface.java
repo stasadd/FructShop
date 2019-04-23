@@ -144,7 +144,6 @@ public class UserInterface {
         System.out.println("8 - відібрати товари, готові для продажу (по даті і типу)");
         System.out.println("9 - відібрати товари (по даті поставки)");
         System.out.println("10 - відібрати товари(по даті поставки і типу)");
-        System.out.println("11 - здійснити реалізацію товару");
         System.out.println("0 - вихід");
         System.out.print("Ваш вибір ->");
     }
@@ -152,7 +151,7 @@ public class UserInterface {
     public void showCompany(Company company) {
         Scanner in = new Scanner(System.in);
         while(true) {
-            Menu();
+            MenuCompany();
             try {
                 int selected = in.nextInt();
                 switch (selected) {
@@ -167,49 +166,45 @@ public class UserInterface {
                         company.load(company.getMainFile());
                         break;
                     }
-//                    case 3: {
-//                        shop.save(shop.getMainFile());
-//                        break;
-//                    }
-//                    case 4: {
-//                        shop.load(shop.getMainFile());
-//                        break;
-//                    }
-//                    case 5: {
-//                        showList(shop.getSpoiledFruits(getCustomDate()));
-//                        break;
-//                    }
-//                    case 6: {
-//                        FruitType tempType = getType();
-//                        showList(shop.getSpoiledFruits(getCustomDate(), tempType), tempType);
-//                        break;
-//                    }
-//                    case 7: {
-//                        showList(shop.getAvailableFruits(getCustomDate()));
-//                        break;
-//                    }
-//                    case 8: {
-//                        FruitType tempType = getType();
-//                        showList(shop.getAvailableFruits(getCustomDate(), tempType), tempType);
-//                        break;
-//                    }
-//                    case 9: {
-//                        showList(shop.getAddedFruits(getCustomDate()));
-//                        break;
-//                    }
-//                    case 10: {
-//                        FruitType tempType = getType();
-//                        showList(shop.getAddedFruits(getCustomDate(), tempType), tempType);
-//                        break;
-//                    }
-//                    case 11: {
-//                        shop.sell("Files\\clients_1.txt");
-//                        break;
-//                    }
-//                    case 12: {
-//                        System.out.println("Поточний баланс магазину - " + shop.getMoneyBalance());
-//                        break;
-//                    }
+                    case 3: {
+                        System.out.println("оберіть магазин (від 0 до " + (company.fruitShops.size()-1) + ")");
+                        System.out.print("->");
+                        int shopIndex = in.nextInt();
+                        FruitShop temp = company.fruitShops.get(shopIndex);
+                        showShop(temp);
+                        break;
+                    }
+                    case 4: {
+                        System.out.println(company.getMoneyBalance());
+                        break;
+                    }
+                    case 5: {
+                        showList(company.getSpoiledFruits(getCustomDate()));
+                        break;
+                    }
+                    case 6: {
+                        FruitType tempType = getType();
+                        showList(company.getSpoiledFruits(getCustomDate(), tempType), tempType);
+                        break;
+                    }
+                    case 7: {
+                        showList(company.getAvailableFruits(getCustomDate()));
+                        break;
+                    }
+                    case 8: {
+                        FruitType tempType = getType();
+                        showList(company.getAvailableFruits(getCustomDate(), tempType), tempType);
+                        break;
+                    }
+                    case 9: {
+                        showList(company.getAddedFruits(getCustomDate()));
+                        break;
+                    }
+                    case 10: {
+                        FruitType tempType = getType();
+                        showList(company.getAddedFruits(getCustomDate(), tempType), tempType);
+                        break;
+                    }
                 }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());

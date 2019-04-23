@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class Company {
     public class CompanyForJson {
         int moneyBalance;
         List<FruitShop> fruitShops;
+        String mainFile;
     }
 
     public List<FruitShop> fruitShops = new ArrayList<>();
@@ -29,18 +29,11 @@ public class Company {
         return moneyBalance;
     }
 
-    public void setMoneyBalance(int moneyBalance) {
-        this.moneyBalance = moneyBalance;
-    }
-
-    public void addtMoneyBalance(int moneyBalance) {
-        this.moneyBalance += moneyBalance;
-    }
-
     public int getCompanyBalance() {
         int balance = 0;
         for(FruitShop shop : fruitShops)
             balance += shop.getMoneyBalance();
+        this.moneyBalance = balance;
         return balance;
     }
 
@@ -53,13 +46,13 @@ public class Company {
     }
 
     public Company() {
-        load(getMainFile());
     }
 
     public void save(String pathToJsonFile) {
         CompanyForJson companyForJson = new CompanyForJson();
         companyForJson.fruitShops = this.fruitShops;
         companyForJson.moneyBalance = this.moneyBalance;
+        companyForJson.mainFile = this.mainFile;
         String json = gson.toJson(companyForJson);
         try (FileWriter writer = new FileWriter(pathToJsonFile) ) {
             writer.write(json);
@@ -76,6 +69,7 @@ public class Company {
             CompanyForJson companyForJson = gson.fromJson(json, CompanyForJson.class);
             this.fruitShops = companyForJson.fruitShops;
             this.moneyBalance = companyForJson.moneyBalance;
+            this.mainFile = companyForJson.mainFile;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             moneyBalance = 0;

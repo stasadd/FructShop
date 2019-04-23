@@ -45,8 +45,6 @@ public class FruitShop {
     }
 
     public FruitShop() {
-        load(mainFile);
-        addFruits("Files\\Delivery.txt");
     }
 
     public void addFruits(String pathToJsonFile) {
