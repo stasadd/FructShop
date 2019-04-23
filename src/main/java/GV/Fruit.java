@@ -59,4 +59,9 @@ public class Fruit {
         this.date = format.format(date);
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return getType() + ": "  + getPrice() + " - " + getStrDate() + " - " + getShelfLife();
+    }
 }
