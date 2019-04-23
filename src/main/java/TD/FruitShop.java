@@ -1,5 +1,7 @@
 package TD;
 
+import GV.Client;
+import GV.Clients;
 import GV.Fruit;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,17 +18,26 @@ public class FruitShop {
         Fruit[] fruits;
     }
 
+    public class ShopForJson {
+        int moneyBalance;
+        List<Fruit> fruits;
+    }
+
     public List<Fruit> fruits = new ArrayList<Fruit>();
     private String mainFile = "Files\\SHOP.txt";
     private Gson gson = new Gson();
-    private Double moneyBalance;
+    private int moneyBalance = 0;
 
-    public Double getMoneyBalance() {
+    public int getMoneyBalance() {
         return moneyBalance;
     }
 
-    public void setMoneyBalance(Double moneyBalance) {
+    public void setMoneyBalance(int moneyBalance) {
         this.moneyBalance = moneyBalance;
+    }
+
+    public void addMoneyBalance(int moneyBalance) {
+        this.moneyBalance += moneyBalance;
     }
 
     public String getMainFile() { return mainFile; }
@@ -38,6 +49,7 @@ public class FruitShop {
     public FruitShop() {
         load(mainFile);
         addFruits("Files\\Delivery.txt");
+        //save(mainFile);
     }
 
     public void addFruits(String pathToJsonFile) {
@@ -56,7 +68,11 @@ public class FruitShop {
     }
 
     public void save(String pathToJsonFile) {
-        String json = gson.toJson(this.fruits);
+//        String json = gson.toJson(this.fruits);
+        ShopForJson shopForJson = new ShopForJson();
+        shopForJson.fruits = this.fruits;
+        shopForJson.moneyBalance = this.moneyBalance;
+        String json = gson.toJson(shopForJson);
         try (FileWriter writer = new FileWriter(pathToJsonFile) ) {
             writer.write(json);
             writer.flush();
@@ -69,8 +85,11 @@ public class FruitShop {
     public void load(String pathToJsonFile) {
         try {
             String json = FileLoader.loadString(pathToJsonFile);
-            Type collectionType = new TypeToken<List<Fruit>>(){}.getType();
-            fruits = gson.fromJson(json, collectionType);
+//            Type collectionType = new TypeToken<List<Fruit>>(){}.getType();
+//            fruits = gson.fromJson(json, collectionType);
+            ShopForJson shopForJson = gson.fromJson(json, ShopForJson.class);
+            this.fruits = shopForJson.fruits;
+            this.moneyBalance = shopForJson.moneyBalance;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -134,6 +153,25 @@ public class FruitShop {
             }
         }
         return Available;
+    }
+
+    public void sell(String pathToJsonFile) {
+        try {
+            String json = FileLoader.loadString(pathToJsonFile);
+            Clients clientsObj = gson.fromJson(json, Clients.class);
+            for(Client client : clientsObj.clients) {
+                List<Fruit> clientNeed = getAvailableFruits(new Date(), client.type);
+                if(client.count <= clientNeed.size()) {
+                    //todo: delete and add moneyBalance
+                    //save(getMainFile());
+                }
+                else {
+                    System.out.println("Товару " + client.type.name() + " не вистачає для покупця " + client.name);
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
 }

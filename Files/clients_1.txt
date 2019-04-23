@@ -1,7 +1,7 @@
 {
 "clients":
 [
-{"name":"Вася","type":"Apple","count":100},
+{"name":"Вася","type":"Apple","count":2},
 {"name":"Джон","type":"Apple","count":500},
 {"name":"Джон","type":"Banana","count":1}
 ]

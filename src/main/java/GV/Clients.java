@@ -1,5 +1,5 @@
 package GV;
 
-class Clients{
+public class Clients{
     public Client[] clients;
 }

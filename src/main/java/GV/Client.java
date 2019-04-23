@@ -1,7 +1,9 @@
 package GV;
 
+import TD.FruitType;
+
 public class Client{
     public String name;
-    public String type;
+    public FruitType type;
     public int count;
 }
