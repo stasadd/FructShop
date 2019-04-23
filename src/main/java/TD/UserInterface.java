@@ -179,7 +179,7 @@ public class UserInterface {
                         break;
                     }
                     case 4: {
-                        System.out.println(company.getMoneyBalance());
+                        System.out.println("Загальний баланс компанії: " + company.getMoneyBalance());
                         break;
                     }
                     case 5: {

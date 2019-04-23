@@ -23,7 +23,6 @@ public class FruitShop {
 
     public List<Fruit> fruits = new ArrayList<Fruit>();
     private String mainFile = "Files\\SHOP.txt";
-    private Gson gson = new Gson();
     private int moneyBalance = 0;
 
     public int getMoneyBalance() {
@@ -48,6 +47,7 @@ public class FruitShop {
     }
 
     public void addFruits(String pathToJsonFile) {
+        Gson gson = new Gson();
         try {
             String json = FileLoader.loadString(pathToJsonFile);
             Delivery delivery = gson.fromJson(json, Delivery.class);
@@ -63,6 +63,7 @@ public class FruitShop {
     }
 
     public void save(String pathToJsonFile) {
+        Gson gson = new Gson();
         ShopForJson shopForJson = new ShopForJson();
         shopForJson.fruits = this.fruits;
         shopForJson.moneyBalance = this.moneyBalance;
@@ -78,6 +79,7 @@ public class FruitShop {
     }
 
     public void load(String pathToJsonFile) {
+        Gson gson = new Gson();
         try {
             String json = FileLoader.loadString(pathToJsonFile);
             ShopForJson shopForJson = gson.fromJson(json, ShopForJson.class);
@@ -171,6 +173,7 @@ public class FruitShop {
     }
 
     public void sell(String pathToJsonFile) {
+        Gson gson = new Gson();
         try {
             String json = FileLoader.loadString(pathToJsonFile);
             Clients clientsObj = gson.fromJson(json, Clients.class);

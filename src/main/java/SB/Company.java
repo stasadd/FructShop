@@ -14,8 +14,6 @@ import java.util.List;
 
 public class Company {
 
-
-    //todo: change structure
     public class CompanyForJson {
         int moneyBalance;
         List<FruitShop> fruitShops;
@@ -28,6 +26,7 @@ public class Company {
     private int moneyBalance = 0;
 
     public int getMoneyBalance() {
+        this.moneyBalance = getCompanyBalance();
         return moneyBalance;
     }
 
@@ -35,7 +34,6 @@ public class Company {
         int balance = 0;
         for(FruitShop shop : fruitShops)
             balance += shop.getMoneyBalance();
-        this.moneyBalance = balance;
         return balance;
     }
 
@@ -50,7 +48,6 @@ public class Company {
     public Company() {
     }
 
-    //todo: change save
     public void save(String pathToJsonFile) {
         for(FruitShop shop : fruitShops)
             shop.save(shop.getMainFile());
@@ -69,7 +66,6 @@ public class Company {
         }
     }
 
-    //todo: change load
     public void load(String pathToJsonFile) {
         try {
             String json = FileLoader.loadString(pathToJsonFile);
