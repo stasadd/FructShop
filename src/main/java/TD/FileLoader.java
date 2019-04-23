@@ -13,7 +13,7 @@ public abstract class FileLoader {
         if(file.exists()) {
             str = new String(Files.readAllBytes(Paths.get(filePath)));
         }
-        else throw null;
+        else throw new IOException();
         return str;
     }
 }

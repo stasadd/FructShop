@@ -37,6 +37,8 @@ public class UserInterface {
         System.out.println("6 - відібрати товари, які можуть зіпсуватись (по даті і типу)");
         System.out.println("7 - відібрати товари, готові для продажу (по даті)");
         System.out.println("8 - відібрати товари, готові для продажу (по даті і типу)");
+        System.out.println("9 - здійснити реалізацію товару");
+        System.out.println("10 - переглянути поточний баланс магазину");
         System.out.println("0 - вихід");
         System.out.print("Ваш вибір ->");
     }
@@ -85,6 +87,14 @@ public class UserInterface {
                     case 8: {
                         FruitType tempType = getType();
                         showList(shop.getAvailableFruits(getCustomDate(), tempType), tempType);
+                        break;
+                    }
+                    case 9: {
+                        shop.sell("Files\\clients_1.txt");
+                        break;
+                    }
+                    case 10: {
+                        System.out.println("Поточний баланс магазину - " + shop.getMoneyBalance());
                         break;
                     }
                 }

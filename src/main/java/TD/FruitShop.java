@@ -4,12 +4,9 @@ import GV.Client;
 import GV.Clients;
 import GV.Fruit;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class FruitShop {
@@ -49,7 +46,6 @@ public class FruitShop {
     public FruitShop() {
         load(mainFile);
         addFruits("Files\\Delivery.txt");
-        //save(mainFile);
     }
 
     public void addFruits(String pathToJsonFile) {
@@ -68,7 +64,6 @@ public class FruitShop {
     }
 
     public void save(String pathToJsonFile) {
-//        String json = gson.toJson(this.fruits);
         ShopForJson shopForJson = new ShopForJson();
         shopForJson.fruits = this.fruits;
         shopForJson.moneyBalance = this.moneyBalance;
@@ -85,8 +80,6 @@ public class FruitShop {
     public void load(String pathToJsonFile) {
         try {
             String json = FileLoader.loadString(pathToJsonFile);
-//            Type collectionType = new TypeToken<List<Fruit>>(){}.getType();
-//            fruits = gson.fromJson(json, collectionType);
             ShopForJson shopForJson = gson.fromJson(json, ShopForJson.class);
             this.fruits = shopForJson.fruits;
             this.moneyBalance = shopForJson.moneyBalance;
@@ -162,8 +155,12 @@ public class FruitShop {
             for(Client client : clientsObj.clients) {
                 List<Fruit> clientNeed = getAvailableFruits(new Date(), client.type);
                 if(client.count <= clientNeed.size()) {
-                    //todo: delete and add moneyBalance
-                    //save(getMainFile());
+                    for(int i = 0; i < client.count; i++) {
+                        addMoneyBalance(clientNeed.get(i).getPrice());
+                        this.fruits.remove(clientNeed.get(i));
+                    }
+                    System.out.println(client.name + " придбав " + client.count + " одиниць товару " + client.type.name());
+                    save(getMainFile());
                 }
                 else {
                     System.out.println("Товару " + client.type.name() + " не вистачає для покупця " + client.name);
