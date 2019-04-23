@@ -20,7 +20,7 @@ public class UserInterface {
 
     private void showList(List<Fruit> ref, FruitType type) {
         if(ref != null && type != null) {
-            System.out.println("Вибірка по товару: " + type);
+            System.out.println("Вибірка по товару: " + type.name());
             System.out.println("Кількість товару: " + ref.size());
             for(Fruit f : ref) {
                 System.out.println(f.toString());
@@ -74,7 +74,8 @@ public class UserInterface {
                         break;
                     }
                     case 6: {
-                        showList(shop.getSpoiledFruits(getCustomDate(), getType()));
+                        FruitType tempType = getType();
+                        showList(shop.getSpoiledFruits(getCustomDate(), tempType), tempType);
                         break;
                     }
                     case 7: {
@@ -82,7 +83,8 @@ public class UserInterface {
                         break;
                     }
                     case 8: {
-                        showList(shop.getAvailableFruits(getCustomDate(), getType()));
+                        FruitType tempType = getType();
+                        showList(shop.getAvailableFruits(getCustomDate(), tempType), tempType);
                         break;
                     }
                 }

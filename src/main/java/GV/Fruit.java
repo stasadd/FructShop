@@ -11,6 +11,31 @@ public class Fruit {
     String date;
     int price;
 
+    public Fruit() {
+    }
+
+    public Fruit(FruitType type, int shelfLife, Date date, int price) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        this.type = type;
+        this.shelfLife = shelfLife;
+        this.date = format.format(date);
+        this.price = price;
+    }
+
+    public Date getDate() throws Exception {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.parse(this.date);
+    }
+
+    public void setDate(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        this.date = format.format(date);
+    }
+
+    public String getStrDate() {
+        return this.date;
+    }
+
     public FruitType getType() {
         return type;
     }
@@ -27,36 +52,11 @@ public class Fruit {
         this.shelfLife = shelfLife;
     }
 
-    public Date getDate() throws Exception {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        return format.parse(this.date);
-    }
-
-    public String getStrDate() {
-        return this.date;
-    }
-
-    public void setDate(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        this.date = format.format(date);
-    }
-
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public Fruit() {
-    }
-
-    public Fruit(FruitType type, int shelfLife, Date date, int price) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        this.type = type;
-        this.shelfLife = shelfLife;
-        this.date = format.format(date);
         this.price = price;
     }
 
