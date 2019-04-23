@@ -31,6 +31,10 @@ public class FruitShop {
 
     public String getMainFile() { return mainFile; }
 
+    public void setMainFile(String shopName) {
+        this.mainFile = "Files\\" + shopName + ".txt";
+    }
+
     public FruitShop() {
         load(mainFile);
         addFruits("Files\\Delivery.txt");
@@ -76,11 +80,11 @@ public class FruitShop {
         List<Fruit> Spoiled = new ArrayList<Fruit>();
         Calendar c = Calendar.getInstance();
         for (Fruit f : this.fruits) {
-            Date date1  = f.getDate();
+            Date date1 = f.getDate();
             c.setTime(date1);
             c.add(Calendar.DATE,f.getShelfLife());
             date1 = c.getTime();
-            if ((date.compareTo(date1)) != -1)
+            if ((date.compareTo(date1)) > 0)
                 Spoiled.add(f);
         }
         return Spoiled;
@@ -109,7 +113,7 @@ public class FruitShop {
                 c.setTime(date1);
                 c.add(Calendar.DATE,f.getShelfLife());
                 date1 = c.getTime();
-                if ((date.compareTo(date1) == -1))
+                if ((date.compareTo(date1) > 0))
                     Spoiled.add(f);
             }
         }
@@ -125,7 +129,7 @@ public class FruitShop {
                 c.setTime(date1);
                 c.add(Calendar.DATE,f.getShelfLife());
                 date1 = c.getTime();
-                if ((date.compareTo(date1)) != -1)
+                if ((date.compareTo(date1)) <= 0)
                     Available.add(f);
             }
         }
