@@ -18,6 +18,7 @@ public class FruitShop {
     public class ShopForJson {
         int moneyBalance;
         List<Fruit> fruits;
+        String mainFile;
     }
 
     public List<Fruit> fruits = new ArrayList<Fruit>();
@@ -67,6 +68,7 @@ public class FruitShop {
         ShopForJson shopForJson = new ShopForJson();
         shopForJson.fruits = this.fruits;
         shopForJson.moneyBalance = this.moneyBalance;
+        shopForJson.mainFile = this.mainFile;
         String json = gson.toJson(shopForJson);
         try (FileWriter writer = new FileWriter(pathToJsonFile) ) {
             writer.write(json);
@@ -83,8 +85,12 @@ public class FruitShop {
             ShopForJson shopForJson = gson.fromJson(json, ShopForJson.class);
             this.fruits = shopForJson.fruits;
             this.moneyBalance = shopForJson.moneyBalance;
+            this.mainFile = shopForJson.mainFile;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            moneyBalance = 0;
+            fruits = new ArrayList<>();
+            mainFile = "Files\\SHOP.txt";
         }
     }
 
@@ -114,6 +120,15 @@ public class FruitShop {
                 Available.add(f);
         }
         return Available;
+    }
+
+    public List<Fruit> getAddedFruits(Date date) throws Exception {
+        List<Fruit> Added = new ArrayList<Fruit>();
+        for (Fruit f : this.fruits) {
+            if ((date.compareTo(f.getDate())) == 0)
+                Added.add(f);
+        }
+        return Added;
     }
 
     public List<Fruit> getSpoiledFruits(Date date, FruitType type) throws Exception{
@@ -146,6 +161,15 @@ public class FruitShop {
             }
         }
         return Available;
+    }
+
+    public List<Fruit> getAddedFruits(Date date, FruitType type) throws Exception {
+        List<Fruit> Added = new ArrayList<Fruit>();
+        for (Fruit f : this.fruits) {
+            if (f.getType().equals(type) && (date.compareTo(f.getDate())) == 0)
+                Added.add(f);
+        }
+        return Added;
     }
 
     public void sell(String pathToJsonFile) {
