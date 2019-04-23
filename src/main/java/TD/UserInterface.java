@@ -167,6 +167,10 @@ public class UserInterface {
                         break;
                     }
                     case 3: {
+                        if(company.fruitShops.isEmpty()) {
+                            System.out.println("Список магазинів порожній");
+                            break;
+                        }
                         System.out.println("оберіть магазин (від 0 до " + (company.fruitShops.size()-1) + ")");
                         System.out.print("->");
                         int shopIndex = in.nextInt();
